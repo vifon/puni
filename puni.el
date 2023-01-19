@@ -1646,14 +1646,7 @@ This respects the variable `kill-whole-line'."
       (when (looking-at (rx (* blank)))
         (setq col-after-spaces-in-line
               (puni--column-of-position (match-end 0))))
-      (puni-soft-delete from to 'strict-sexp 'beyond 'kill)
-      (when (and (looking-at (rx (* blank) (not (any blank "\n"))))
-                 (setq delete-spaces-to (1- (match-end 0)))
-                 (> (puni--column-of-position delete-spaces-to)
-                    col-after-spaces-in-line))
-        (save-excursion
-          (move-to-column col-after-spaces-in-line)
-          (puni-delete-region (point) delete-spaces-to 'kill))))))
+      (puni-soft-delete from to 'strict-sexp 'beyond 'kill))))
 
 ;;;###autoload
 (defun puni-backward-kill-line (&optional n)
